@@ -70,7 +70,7 @@ print('Function to develop a report and send an email')
 print(buildStatus)
 msg = MIMEMultipart()
 msg['From'] = "maddulakavyaaws@gmail.com"
-msg['To'] = "vamshigannu.nmims@gmail.com" 
+msg['To'] = "venkateswarluec@gmail.com" 
 msg['Subject'] = "Build status" 
 body = """Hi Team, Please find the build status 
 
@@ -81,7 +81,7 @@ s.starttls() # for security
 s.login("maddulakavyaaws@gmail.com", "prince@2021") 
 text = msg.as_string() 
 # sending the mail 
-s.sendmail("maddulakavyaaws@gmail.com", "vamshigannu.nmims@gmail.com" , text.format(buildStatus))
+s.sendmail("maddulakavyaaws@gmail.com", "venkateswarluec@gmail.com" , text.format(buildStatus))
 s.quit()
 print('EMAIL sent')
 
@@ -116,7 +116,7 @@ print('Function to develop a report and send an email')
 print(buildStatus)
 msg = MIMEMultipart()
 msg['From'] = "maddulakavyaaws@gmail.com"
-msg['To'] = "vamshigannu.nmims@gmail.com" 
+msg['To'] = "venkateswarluec@gmail.com" 
 msg['Subject'] = "Build status" 
 body = """Hi Team, Please find the build status 
 
@@ -127,6 +127,6 @@ s.starttls() # for security
 s.login("maddulakavyaaws@gmail.com", "prince@2021") 
 text = msg.as_string() 
 # sending the mail 
-s.sendmail("maddulakavyaaws@gmail.com", "vamshigannu.nmims@gmail.com" , text.format(buildStatus))
+s.sendmail("maddulakavyaaws@gmail.com", "venkateswarluec@gmail.com" , text.format(buildStatus))
 s.quit()
 print('EMAIL sent')
