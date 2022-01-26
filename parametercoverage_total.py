@@ -85,3 +85,48 @@ s.sendmail("giri.vakati@gmail.com", "venkateswarluec@gmail.com" , text.format(bu
 s.quit()
 print('EMAIL sent')
 
+#Step 6 -- Function to convert dev.txt to data frame 
+print('#Step 6 -- Function to convert dev.txt to data frame')
+
+dfTextFile = pd.read_csv('Psm_coverage_psm_dev.txt', memory_map=True, header=None)
+print(dfTextFile.info())
+for col in dfTextFile:
+    print(dfTextFile[col].unique())
+
+
+#Step 7 -- Function to find the average of parameters 
+print('#Step 7 -- Function to find the average of parameters')
+print(dfTextFile.describe())
+
+#Step 8 -- Function compare average parameter data frame to excel data frame 
+
+#Step 9 -- Function to pass or fail the build depending on the previous step 
+
+buildStatus=''
+if resultDataFrame.size>0:
+    buildStatus='PASS'
+    print('PASS')
+else:
+    buildStatus='FAIL'
+    print('FAIL')
+    
+#Step 10 -- Function to develop a report and send an email 
+
+print('Function to develop a report and send an email')
+print(buildStatus)
+msg = MIMEMultipart()
+msg['From'] = "giri.vakati@gmail.com"
+msg['To'] = "venkateswarluec@gmail.com" 
+msg['Subject'] = "Build status" 
+body = """Hi Team, Please find the build status 
+
+Build is {}"""
+msg.attach(MIMEText(body, 'plain'))
+s = smtplib.SMTP('smtp.gmail.com', 587) 
+s.starttls() # for security
+s.login("giri.vakati@gmail.com", "atrtxgutxyaxnuxv") 
+text = msg.as_string() 
+# sending the mail 
+s.sendmail("giri.vakati@gmail.com", "venkateswarluec@gmail.com" , text.format(buildStatus))
+s.quit()
+print('EMAIL sent')
