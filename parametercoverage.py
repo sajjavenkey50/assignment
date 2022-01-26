@@ -2,6 +2,13 @@
 import pandas as pd
 import xml.etree.ElementTree as ET
 
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email import encoders
+
+
 # read by default 1st sheet of an excel file
 #dataframe1 = pd.read_excel('individualparametercoverage.xlsx')
 #dateframe2 = dataframe1.parse('Sheet1', skiprows=4, index_col=None, na_values=['NA'])
@@ -33,10 +40,93 @@ xmlToDf= convertXMLtoDataFrame()
 print(xmlToDf.to_string(index=False))
 
 
-# Step 3
+# Step 3 -- Function to find the Parameter in the xml data frame
+print('Function to find the Parameter in the xml data frame')
 def findParameterFromXMLDataFrame(xmlToDf, searchString):
     print(xmlToDf[xmlToDf['Object'].str.contains(searchString)])
 
 searchString='RTDB_GP_ESWITCH_OUTPUTS_E'
 findParameterFromXMLDataFrame(xmlToDf,searchString)
 
+# Step 4-- Function to pass or fail the build depending on the previous step 
+
+print('Function to pass or fail the build depending on the previous step')
+def findParameterFromXMLDataFrame(xmlToDf, searchString):
+    return xmlToDf[xmlToDf['Object'].str.contains(searchString)]
+    
+searchString='RTDB_GP_ESWITCH_OUTPUTS_E1'
+resultDataFrame=findParameterFromXMLDataFrame(xmlToDf,searchString)
+print(resultDataFrame.size)
+buildStatus=''
+if resultDataFrame.size>0:
+    buildStatus='PASS'
+    print('PASS')
+else:
+    buildStatus='FAIL'
+    print('FAIL')
+
+# Step 5 -- Function to develop a report and send an email 
+print('Function to develop a report and send an email')
+print(buildStatus)
+msg = MIMEMultipart()
+msg['From'] = "maddulakavyaaws@gmail.com"
+msg['To'] = "vamshigannu.nmims@gmail.com" 
+msg['Subject'] = "Build status" 
+body = """Hi Team, Please find the build status 
+
+Build is {}"""
+msg.attach(MIMEText(body, 'plain'))
+s = smtplib.SMTP('smtp.gmail.com', 587) 
+s.starttls() # for security
+s.login("maddulakavyaaws@gmail.com", "prince@2021") 
+text = msg.as_string() 
+# sending the mail 
+s.sendmail("maddulakavyaaws@gmail.com", "vamshigannu.nmims@gmail.com" , text.format(buildStatus))
+s.quit()
+print('EMAIL sent')
+
+#Step 6 -- Function to convert dev.txt to data frame 
+print('#Step 6 -- Function to convert dev.txt to data frame')
+
+dfTextFile = pd.read_csv('Psm_coverage_psm_dev.txt', memory_map=True, header=None)
+print(dfTextFile.info())
+for col in dfTextFile:
+    print(dfTextFile[col].unique())
+
+
+#Step 7 -- Function to find the average of parameters 
+print('#Step 7 -- Function to find the average of parameters')
+print(dfTextFile.describe())
+
+#Step 8 -- Function compare average parameter data frame to excel data frame 
+
+#Step 9 -- Function to pass or fail the build depending on the previous step 
+
+buildStatus=''
+if resultDataFrame.size>0:
+    buildStatus='PASS'
+    print('PASS')
+else:
+    buildStatus='FAIL'
+    print('FAIL')
+    
+#Step 10 -- Function to develop a report and send an email 
+
+print('Function to develop a report and send an email')
+print(buildStatus)
+msg = MIMEMultipart()
+msg['From'] = "maddulakavyaaws@gmail.com"
+msg['To'] = "vamshigannu.nmims@gmail.com" 
+msg['Subject'] = "Build status" 
+body = """Hi Team, Please find the build status 
+
+Build is {}"""
+msg.attach(MIMEText(body, 'plain'))
+s = smtplib.SMTP('smtp.gmail.com', 587) 
+s.starttls() # for security
+s.login("maddulakavyaaws@gmail.com", "prince@2021") 
+text = msg.as_string() 
+# sending the mail 
+s.sendmail("maddulakavyaaws@gmail.com", "vamshigannu.nmims@gmail.com" , text.format(buildStatus))
+s.quit()
+print('EMAIL sent')
