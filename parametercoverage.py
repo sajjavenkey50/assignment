@@ -69,7 +69,7 @@ else:
 print('Function to develop a report and send an email')
 print(buildStatus)
 msg = MIMEMultipart()
-msg['From'] = "maddulakavyaaws@gmail.com"
+msg['From'] = "giri.vakati@gmail.com"
 msg['To'] = "venkateswarluec@gmail.com" 
 msg['Subject'] = "Build status" 
 body = """Hi Team, Please find the build status 
@@ -78,10 +78,10 @@ Build is {}"""
 msg.attach(MIMEText(body, 'plain'))
 s = smtplib.SMTP('smtp.gmail.com', 587) 
 s.starttls() # for security
-s.login("maddulakavyaaws@gmail.com", "prince@2021") 
+s.login("giri.vakati@gmail.com", "atrtxgutxyaxnuxv") 
 text = msg.as_string() 
 # sending the mail 
-s.sendmail("maddulakavyaaws@gmail.com", "venkateswarluec@gmail.com" , text.format(buildStatus))
+s.sendmail("giri.vakati@gmail.com", "venkateswarluec@gmail.com" , text.format(buildStatus))
 s.quit()
 print('EMAIL sent')
 
@@ -115,7 +115,7 @@ else:
 print('Function to develop a report and send an email')
 print(buildStatus)
 msg = MIMEMultipart()
-msg['From'] = "maddulakavyaaws@gmail.com"
+msg['From'] = "giri.vakati@gmail.com"
 msg['To'] = "venkateswarluec@gmail.com" 
 msg['Subject'] = "Build status" 
 body = """Hi Team, Please find the build status 
@@ -124,9 +124,9 @@ Build is {}"""
 msg.attach(MIMEText(body, 'plain'))
 s = smtplib.SMTP('smtp.gmail.com', 587) 
 s.starttls() # for security
-s.login("maddulakavyaaws@gmail.com", "prince@2021") 
+s.login("giri.vakati@gmail.com", "atrtxgutxyaxnuxv") 
 text = msg.as_string() 
 # sending the mail 
-s.sendmail("maddulakavyaaws@gmail.com", "venkateswarluec@gmail.com" , text.format(buildStatus))
+s.sendmail("giri.vakati@gmail.com", "venkateswarluec@gmail.com" , text.format(buildStatus))
 s.quit()
 print('EMAIL sent')
