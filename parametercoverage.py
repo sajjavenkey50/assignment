@@ -84,8 +84,8 @@ text = msg.as_string()
 s.sendmail("giri.vakati@gmail.com", "venkateswarluec@gmail.com" , text.format(buildStatus))
 s.quit()
 print('EMAIL sent')
-if buildStatus == 'FAIL':
- raise
+#if buildStatus == 'FAIL':
+ #raise
 
 #Step 6 -- Function to convert dev.txt to data frame 
 print('#Step 6 -- Function to convert dev.txt to data frame')
